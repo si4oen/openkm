@@ -48,7 +48,8 @@ cat /dev/null > ~/.bash_history && history -c
 adduser openkm
 
 ## Download file
-cd /home/openkm
+mkdir /opt/openkm
+cd /opt/openkm
 wget https://nchc.dl.sourceforge.net/project/openkm/common/OKMInstaller.jar
 
 ## Update hosts file
