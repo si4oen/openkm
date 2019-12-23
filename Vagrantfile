@@ -4,41 +4,45 @@
 ENV['VAGRANT_NO_PARALLEL'] = 'yes'
 
 Vagrant.configure(2) do |config|
-  
+
   ### configuration parameters ###
-  
-  #LOCAL_SSH_PORT = "2222" #which host port to forward box SSH port to
+
+  #HOST_PORT = "2222" #which host-port forward to guest-port
+  #GUEST_PORT = "22" #which guest-port will be forward from host-port
   BOX_BASE = "centos/7" #Vagrant base box to use
   BOX_NAME = "openkm" #name of box
   BOX_RAM_MB = "4096" #amount of RAM
   BOX_CPU_CORE = "2" #number of CPUs
 
   ### end configuration parameters ###
-  
+
   # number of node to deploy
   NodeCount = 1
   (1..NodeCount).each do |i|
-    
+
+	#which host-port forward to box-port
+	#config.vm.network "forwarded_port", guest: "#{GUEST_PORT}", host: "#{HOST_PORT}"
+
 	#ssh key-based authentication
 	config.ssh.insert_key = false
     config.ssh.private_key_path = ['~/.vagrant.d/insecure_private_key', '~/.ssh/id_rsa']
     config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
-	
+
 	#If install VirtualBox Guest Additions set auto_update to "TRUE" or running command "vagrant vbguest --do install"
 	#must install ==> vagrant plugin install vagrant-vbguest
     if Vagrant.has_plugin?("vagrant-vbguest") then
       config.vbguest.auto_update = false
       config.vbguest.no_remote = true
     end
-	
+
 	#run bootstrap script
 	config.vm.provision "shell", path: "bootstrap.sh"
-	
+
     config.vm.define "#{BOX_NAME}#{i}" do |node|
       node.vm.box = BOX_BASE
       node.vm.hostname = "#{BOX_NAME}#{i}.testlab.local"
       node.vm.network "public_network", ip: "192.168.16.11#{i}"
-      
+
 	  #provision resources to vm
       node.vm.provider "virtualbox" do |vb|
         vb.name = "#{BOX_NAME}#{i}"
