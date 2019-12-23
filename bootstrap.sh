@@ -7,7 +7,7 @@ yum update -y
 
 ## Install desired packages
 echo "[TASK] Installing desired packages"
-yum install -y net-tools bind-utils wget nano java-1.8.0-openjdk-devel mariadb-server 
+yum install -y wget nano java-1.8.0-openjdk-devel mariadb-server 
 
 ## Enable password authentication
 #echo "[TASK] Enabled password authentication in sshd config"
