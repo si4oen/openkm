@@ -7,7 +7,7 @@ yum update -y
 
 ## Install desired packages
 echo "[TASK] Installing desired packages"
-yum install -y net-tools bind-utils wget nano java-1.8.0-openjdk-devel mariadb-server 
+yum install -y wget nano nginx java-1.8.0-openjdk-devel mariadb-server 
 
 ## Enable password authentication
 #echo "[TASK] Enabled password authentication in sshd config"
@@ -48,7 +48,8 @@ cat /dev/null > ~/.bash_history && history -c
 adduser openkm
 
 ## Download file
-cd /home/openkm
+mkdir /opt/openkm
+cd /opt/openkm
 wget https://nchc.dl.sourceforge.net/project/openkm/common/OKMInstaller.jar
 
 ## Update hosts file
@@ -60,6 +61,6 @@ wget https://nchc.dl.sourceforge.net/project/openkm/common/OKMInstaller.jar
 
 ## Rebooting Server
 echo "[TASK] Rebooting server"
-echo ""
+echo "Please wait for server rebooting"
 echo "========== Finished =========="
 sudo reboot now
