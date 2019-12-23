@@ -7,8 +7,7 @@ Vagrant.configure(2) do |config|
   
   ### configuration parameters ###
   
-  #which host port to forward box SSH port to
-  #LOCAL_SSH_PORT = "2222"
+  #LOCAL_SSH_PORT = "2222" #which host port to forward box SSH port to
   BOX_BASE = "centos/7" #Vagrant base box to use
   BOX_NAME = "openkm" #name of box
   BOX_RAM_MB = "4096" #amount of RAM
