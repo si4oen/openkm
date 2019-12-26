@@ -2,12 +2,12 @@
 
 ## Update the system >/dev/null 2>&1
 echo "[TASK] Updating the system"
-yum install -y epel-release
+#yum install -y epel-release
 yum update -y
 
 ## Install desired packages
 echo "[TASK] Installing desired packages"
-yum install -y wget nano nginx java-1.8.0-openjdk-devel mariadb-server 
+yum install -y nginx java-1.8.0-openjdk-devel mariadb-server
 
 ## Enable password authentication
 #echo "[TASK] Enabled password authentication in sshd config"
@@ -40,8 +40,8 @@ yum -y autoremove
 yum clean all
 rm -rf /tmp/*
 rm -f /var/log/wtmp /var/log/btmp
-dd if=/dev/zero of=/EMPTY bs=1M
-rm -f /EMPTY
+#dd if=/dev/zero of=/EMPTY bs=1M
+#rm -f /EMPTY
 cat /dev/null > ~/.bash_history && history -c
 
 ## Create a user
@@ -61,6 +61,6 @@ wget https://nchc.dl.sourceforge.net/project/openkm/common/OKMInstaller.jar
 
 ## Rebooting Server
 echo "[TASK] Rebooting server"
-echo "Please wait for server rebooting"
+echo ""
 echo "========== Finished =========="
 sudo reboot now
